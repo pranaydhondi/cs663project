@@ -17,24 +17,23 @@ function y = mean_shift(A,delta)
 C = [4 0;0 4];
 C1 = inv(C);
 y = zeros(300,2);
+iteration_i = zeros(300,1);
     for i = 1:300
         xn = A(i,:);
+        iter = 0;
         while(true)
+            iter = iter+1;
             den =0 ;
             num = zeros(1,2);
             for j = 1:300
                 h = exp(-0.5*(A(j,:)-xn)*C1*transpose((A(j,:)-xn)));
-%                 disp(h);
                 num = num + h*A(j,:);
                 den = den + h;
             end
             xxn = num/den;
-%             disp(xn);
-%             disp(xxn);
             xxn1 = xxn - xn;
             xxn1 = xxn1.^2;
             xxn1 = sum(xxn1);
-%             disp(xxn1)
             if(xxn1 < delta)
                 break;
             else
@@ -42,10 +41,14 @@ y = zeros(300,2);
             end
             
         end
-     y(i,:) = xn;
-%      disp(xn);
+        iteration_i(i)=iter;
+%         disp(iteration_i(i));
+        y(i,:) = xn;
     end
-
+%     disp(size(iteration_i));
+    disp(strcat('Maximum no.of iterations :',num2str(max(iteration_i))));
+    disp(strcat('Manimum no.of iterations :',num2str(min(iteration_i))));
+    disp(strcat('Average no.of iterations :',num2str(sum(iteration_i)/300)));
 
 end
 
