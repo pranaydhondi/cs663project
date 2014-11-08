@@ -1,5 +1,4 @@
 Roll: 	120050047
 	120050054
-Run myDriver.m for options.
-
-All mat files are in images folder.
+Run myDriver.m for option.
+Report is present in report folder
