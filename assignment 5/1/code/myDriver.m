@@ -18,7 +18,7 @@ end
 % ymax = max(x(:,2));
 % xlim([xmin xmax]);
 figure(1);
-scatter(x(:,1) , x(:,2));
+scatter(x(:,1) , x(:,2),sample_points);
 y=mean_shift(x,alpha);
 hold on;
 scatter(y(:,1) , y(:,2),'r+');
