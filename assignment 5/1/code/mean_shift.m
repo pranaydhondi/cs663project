@@ -12,20 +12,20 @@
 %     disp(strcat('Manimum no.of iterations :',num2str(min(z))));
 %     disp(strcat('Average no.of iterations :',num2str(sum(z)/300)));
 % end
-function y = mean_shift(A,delta)
+function y = mean_shift(A,delta,sample_points)
 % disp(A);
 C = [4 0;0 4];
 C1 = inv(C);
-y = zeros(300,2);
-iteration_i = zeros(300,1);
-    for i = 1:300
+y = zeros(sample_points,2);
+iteration_i = zeros(sample_points,1);
+    for i = 1:sample_points
         xn = A(i,:);
         iter = 0;
         while(true)
             iter = iter+1;
             den =0 ;
             num = zeros(1,2);
-            for j = 1:300
+            for j = 1:sample_points
                 h = exp(-0.5*(A(j,:)-xn)*C1*transpose((A(j,:)-xn)));
                 num = num + h*A(j,:);
                 den = den + h;
@@ -48,7 +48,7 @@ iteration_i = zeros(300,1);
 %     disp(size(iteration_i));
     disp(strcat('Maximum no.of iterations :',num2str(max(iteration_i))));
     disp(strcat('Manimum no.of iterations :',num2str(min(iteration_i))));
-    disp(strcat('Average no.of iterations :',num2str(sum(iteration_i)/300)));
+    disp(strcat('Average no.of iterations :',num2str(sum(iteration_i)/sample_points)));
 
 end
 
