@@ -3,8 +3,9 @@ u2 = [5.0 5.0];
 C1 = [2.0 0.0;0.0 2.0];
 C2 = [2.0 1.0;1.0 2.0];
 alpha = 0.0001;
-x1 = mvnrnd(u1,C1,300);
-x2 = mvnrnd(u2,C2,300);
+sample_points = 3000;
+x1 = mvnrnd(u1,C1,sample_points);
+x2 = mvnrnd(u2,C2,sample_points);
 a = rand(1);
 if (a<=0.4)
 x = x1 ;
@@ -19,6 +20,5 @@ end
 figure(1);
 scatter(x(:,1) , x(:,2));
 y=mean_shift(x,alpha);
-%xlim([xmin xmax]);
-figure(2);
-scatter(y(:,1) , y(:,2));
+hold on;
+scatter(y(:,1) , y(:,2),'r+');
